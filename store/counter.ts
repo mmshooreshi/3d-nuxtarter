@@ -1,4 +1,4 @@
-import { ref, Ref } from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
 
 interface CounterState {
