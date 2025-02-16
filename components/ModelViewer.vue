@@ -10,7 +10,7 @@
   import { ref, computed } from 'vue'
   import { useModelsStore } from '~/store/useModelsStore'
   import { useSceneManager } from '~/composables/useSceneManager'
-  import STLSlicer from '@/components/SlicerW.vue';
+  import STLSlicer from '@/components/SlicerSTL.vue';
 
   const modelsStore = useModelsStore()
   const models = computed(() => modelsStore.models)
