@@ -974,33 +974,23 @@ function canvasToBlob(canvas: HTMLCanvasElement): Promise<Blob> {
 }
 
 // Replace saveAllSlices with this updated version:
-async function saveAllSlices() {
+const saveAllSlices = async () => {
   for (let i = 0; i < slices.value.length; i++) {
     console.log(`Saving slice ${i + 1} of ${slices.value.length}...`);
-    
-    // Generate high-resolution slice canvas
     const canvas = exportSliceToCanvas(slices.value[i]);
-
     try {
-      // Convert canvas to PNG Blob
       const blob = await canvasToBlob(canvas);
-
-      // Embed 96 DPI metadata
-      const finalBlob = await setPNG96DPI(blob);
-
-      // Create download link
       const link = document.createElement('a');
-      link.href = URL.createObjectURL(finalBlob);
+      link.href = URL.createObjectURL(blob);
       link.download = `slice_${(i + 1).toString().padStart(3, '0')}.png`;
       link.click();
-      
       console.log(`Saved slice ${i + 1}`);
     } catch (err) {
       console.error(`Error saving slice ${i + 1}:`, err);
     }
   }
   console.log("All slices saved.");
-}
+};
 
 /**
  * Save all slices as separate 8K PNG files.
